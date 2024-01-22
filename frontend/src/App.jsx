@@ -1,5 +1,7 @@
 import { useState } from "react";
-  import GuarantorForm from "./components/GuarantorForm";
+import GuarantorForm from "./components/GuarantorForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
   import GetDetails from "./components/GetDetails";
   
   function App() {
@@ -9,7 +11,8 @@ import { useState } from "react";
           <p className="w-full uppercase text-center font-bold text-2xl py-5">
             Employee guarantor form
           </p>
-          <GuarantorForm />
+          <ToastContainer/>
+            <GuarantorForm />
           {/* <GetDetails /> */}
         </div>
       </div>

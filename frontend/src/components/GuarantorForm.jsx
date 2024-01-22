@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
   import PhoneInput from "react-phone-input-2";
   import "react-phone-input-2/lib/style.css";
   import FormImage from "./FormImage";
-  import TypingText from "./TypingText";
+  // import TypingText from "./TypingText";
+  import { toast } from "react-toastify";
   
   const GuarantorForm = () => {
+    const [loading,setLoading] = useState(false)
     const [valid, setValid] = useState(true);
+    const [error,setError] = useState(false)
     const [success, setSuccess] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState("");
     const [formData, setFormData] = useState({
@@ -55,6 +58,7 @@ import { useEffect, useState } from "react";
       e.preventDefault();
   
       try {
+        setLoading(true)
         const response = await fetch("http://localhost:5000/guarantor", {
           method: "POST",
           headers: {
@@ -66,15 +70,20 @@ import { useEffect, useState } from "react";
         });
   
         if (!response.ok) {
+          setLoading(false)
         //   throw new Error(HTTP error! Status: ${response.status});
         throw new Error('Error');
         }
   
         const data = await response.json();
+        setLoading(false)
         setSuccess(true);
-        console.log(data);
+        toast.success("Successfully Submitted !");
+        // console.log(data);
       } catch (error) {
-        console.error("Error:", error.message);
+        setLoading(false)
+        toast.error(error.message);
+        // console.error( error.message);
       }
     };
   
@@ -89,12 +98,10 @@ import { useEffect, useState } from "react";
       const phoneNumberPattern = /^\d{10}$/;
       return phoneNumberPattern.test(phoneNumber);
     };
-    // useEffect(() => {
   
-    // },[])
     return (
       <div className=" w-full p-4">
-        <span className="block font-semibold text-xl mb-4">Employees's Details</span>
+        <span className="block font-semibold text-xl mb-4 text-gray-600">Employees's Details</span>
         <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
           {/* Employees's First and Last Name */}
           <div className="w-[full] flex flex-col gap-6 lg:flex-row lg:gap-0 lg:space-x-60">
@@ -132,7 +139,7 @@ import { useEffect, useState } from "react";
             />
           </div>
   
-          <span className="font-semibold text-xl my-4">Guarantor's Details</span>
+          <span className="font-semibold text-xl my-4 text-gray-600">Guarantor's Details</span>
           {/* Guarantor's First and Last Name */}
           <div className="w-full flex flex-col gap-6 lg:flex-row lg:gap-0 lg:space-x-60 ">
             <div className="flex flex-col flex-1">
@@ -157,10 +164,10 @@ import { useEffect, useState } from "react";
             </div>
           </div>
           {/* Email */}
-          <div className="flex ">
+          <div className="flex flex-col lg:flex-row">
             <label className="form_label w-[40%]">Email</label>
             <input
-              className="w-[60%]"
+              className="w-[100] lg:w-[60%]"
               placeholder=""
               type="email"
               name="email"
@@ -169,7 +176,7 @@ import { useEffect, useState } from "react";
             />
           </div>
           {/* Phone Number /SSN */}
-          <div className="w-full lg:flex lg:space-x-60">
+          <div className="w-full flex gap-4 lg:gap-0 flex-col lg:flex-row lg:space-x-60">
             <div className="flex flex-col flex-1">
               <label className="form_label">
                 phone number
@@ -249,11 +256,11 @@ import { useEffect, useState } from "react";
           {/* Image */}
           <FormImage setFormData={setFormData} />
           {/* {success && <div className="bg-green-400">Successfully submitted</div>} */}
-          {success && (
+          {/* {success && (
             <TypingText text={"Successfully Submitted"} intervalDuration={50} className="success" />
-          )}
+          )} */}
           <div className="w-full flex justify-center mt-4">
-            <button className=" bg-black text-white w-full  p-2 rounded-md uppercase font-semibold">
+            <button className={`bg-black text-white w-full  p-2 rounded-md uppercase font-semibold ${loading && 'cursor-wait'}`} disabled={loading}>
               Submit
             </button>
           </div>

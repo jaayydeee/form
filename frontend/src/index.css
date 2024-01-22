@@ -1,6 +1,6 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
   
   *{
     box-sizing: border-box;
@@ -41,7 +41,9 @@
     outline: none;
   }
   button:hover {
-    background: linear-gradient(to right, #000000, #5e656c,#000000);
+    /* background: linear-gradient(to right, #000000, #5e656c,#000000); */
+    background: #202020;
+    transition: all .5s ease;
   }
   
   .success {
@@ -50,6 +52,7 @@
     padding: 6px;
     border-radius:4px;
     width: fit-content;
+    
   }
   
   .error {

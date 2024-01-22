@@ -23,19 +23,15 @@ app.use("/guarantor", guarantorRoutes);
 //to serve the frontend
 app.use(express.static(path.join(__dirname, "./frontend/build")));
 
-// app.get('/', (req, res) => {
-//     res.send('Hello from our server!')
-// })
-
-// app.get("*", function (req, res) {
-//   res.sendFile(
-//     path.join(__dirname, "./frontend/build/index.html"),
-//     function (err) {
-//       //res.status(500).send(err);
-//       res.status(500).json(err);
-//     }
-//   );
-// });
+app.get("*", function (req, res) {
+  res.sendFile(
+    path.join(__dirname, "./frontend/build/index.html"),
+    function (err) {
+      //res.status(500).send(err);
+      res.status(500).json(err);
+    }
+  );
+});
 
 //Server Running
 app.listen(process.env.PORT || 5000, () => {

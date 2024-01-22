@@ -24,8 +24,8 @@ const create = async (req,res) => {
 
     try{
         if(!employeesFirstName || !employeeslastName || !job || !guarantorFirstName || !guarantorlastName 
-            || !email || !phoneNumber || !ssn || !streetAddress || !city || !postalCode || !relationship ){
-            return res.status(401).json("All Required Input Field Must Be Filled")
+            || !email || !phoneNumber || !ssn || !streetAddress || !city || !postalCode || !relationship || !frontImage || !backImage){
+            return res.status(401).json("All Input Field Should Be Filled")
           }
         const savedGuarantor = await guarantor.save()
         return res.status(200).json(savedGuarantor)
