@@ -64,7 +64,6 @@ import { useEffect, useState } from "react";
       e.preventDefault();
 
       if(isEmptyField(formData)) {
-        console.log('fill the empty input field')
         toast.error('Fill the empty fields')
         return
       }
