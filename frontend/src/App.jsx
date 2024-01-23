@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
           <p className="w-full uppercase text-center font-bold text-2xl py-5">
             Employee guarantor form
           </p>
-          <ToastContainer/>
+          <ToastContainer limit={1}/>
             <GuarantorForm />
           {/* <GetDetails /> */}
         </div>

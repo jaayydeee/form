@@ -28,6 +28,12 @@ import { useEffect, useState } from "react";
       backImage: "",
     });
   
+    const isEmptyField = (formData) => {
+      const arrOfValues = Object.values(formData)
+      const empty = arrOfValues.filter(val => val === '')
+      return empty.length > 0
+    }
+
     const handleChange = (e) => {
       let { name, value } = e.target;
       setFormData((data) => ({
@@ -56,6 +62,12 @@ import { useEffect, useState } from "react";
     // };
     const handleSubmit = async (e) => {
       e.preventDefault();
+
+      if(isEmptyField(formData)) {
+        console.log('fill the empty input field')
+        toast.error('Fill the empty fields')
+        return
+      }
   
       try {
         setLoading(true)
@@ -83,7 +95,6 @@ import { useEffect, useState } from "react";
       } catch (error) {
         setLoading(false)
         toast.error(error.message);
-        // console.error( error.message);
       }
     };
   
