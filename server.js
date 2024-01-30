@@ -21,7 +21,7 @@ app.use(express.json({limit: '50mb'}))
 app.use("/guarantor", guarantorRoutes);
 
 //to serve the frontend
-app.use(express.static(path.join(__dirname, "./frontend/dist")));
+app.use(express.static(path.join(__dirname, "./frontend/dist/index.html")));
 
 app.get("*", function (req, res) {
   res.sendFile(
