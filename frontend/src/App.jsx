@@ -2,7 +2,7 @@ import { useState } from "react";
 import GuarantorForm from "./components/GuarantorForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-  import GetDetails from "./components/GetDetails";
+  // import GetDetails from "./components/GetDetails";
   
   function App() {
     return (

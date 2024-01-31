@@ -70,7 +70,7 @@ import { useEffect, useState } from "react";
   
       try {
         setLoading(true)
-        const response = await fetch("http://localhost:5000/guarantor", {
+        const response = await fetch("https://guarantor-form.cyclic.app/guarantor", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
